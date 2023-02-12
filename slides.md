@@ -2,9 +2,25 @@
 canvasWidth: 1024
 ---
 
-# Slidev
+# Effects and Effectful Programs
 
-Effects and effectful programs
+Or: How to think with composition
+
+---
+
+# Scenario
+
+Once upon a time, there was the Best Startup Ever
+
+You're a developer hired to an insure-tech startup, SmoochEarth. They plan to "grow fast" and have a very passionate team running the business.
+You're tasked with the usual impossible demand:
+
+Build scalable, secure, robust software that is easy to iterate on and maintain.
+
+Also, do it in 2 weeks
+
+
+You know the shtick.
 
 ---
 
