@@ -20,7 +20,7 @@ pre.shiki {
 
   /* Give it some space to breathe */
   padding: 12px;
-  padding-bottom: 44px;
+  padding-bottom: 24px;
 
   /* All code samples get a grey border, twoslash ones get a different color */
   /* border-left: 1px solid #999; */

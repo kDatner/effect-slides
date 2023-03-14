@@ -1,11 +1,14 @@
 ---
 canvasWidth: 1024
+layout: intro
 ---
 
 # Effects and Effectful Programs
 
 Or: How to think with composition
 
+---
+layout: fact
 ---
 
 # Scenario
@@ -351,7 +354,7 @@ Just to simplify examples:
 
 export * as Effect from '@effect/io/Effect'
 export * as Data from '@effect/data/Data'
-export { pipe } from '@fp-ts/core/Function'
+export { pipe } from '@effect/data/Function'
 // so on and so forth
 ```
 
@@ -469,7 +472,7 @@ export * from './examples/leads'
 import { Effect, Exit, Cause, pipe } from './common'
 import * as Leads from "./leads"
 
-export const program = Effect.struct({
+export const program = Effect.all({
   datner: Leads.getLead("datner"),
   tommy: Leads.getLead("tommy")
 })
@@ -477,8 +480,10 @@ export const program = Effect.struct({
 export const main = pipe(
   program,
   Effect.flatMap((leads) => Effect.logInfo(`Leads: ${JSON.stringify(leads)}`)),
-  Effect.catchTag("FetchError", (error) => Effect.logError(`FetchError: ${JSON.stringify(error)}`)),
-  Effect.catchTag("JsonBodyError", (error) => Effect.logError(`JsonBodyError: ${JSON.stringify(error)}`)),
+  Effect.catchTags({
+    FetchError: (error) => Effect.logError('oh no'),
+    JsonBodyError: (error) => Effect.logError('oops')
+  })
 )
 
 Effect.runCallback(main, (exit) => {
@@ -773,3 +778,45 @@ Effect.runCallback(main, (exit) => {
   }
 })
 ```
+
+---
+layout: center
+---
+
+# So what did we learn?
+
+<v-clicks>
+
+  1. Real-World software is hard
+  2. Concurrent logic is hard
+  3. Error Handling is hard
+  4. Everything is so hard!!!!
+  5. Composition allows us to share generic logic in an uncoupled way
+  6. We don't have to solve the problems someone else already did
+  7. `Effect-TS` is amazing at building meaningful software
+
+</v-clicks>
+
+---
+layout: center
+---
+
+# Many thanks
+
+To the following people for being amazing at what they do, and helping me write this presentation
+
+ - Michael Arnaldi - Creator of `Effect-TS`. For providing the precursor to this presentation @MichaelArnaldi
+ - Max Brown - Core Maintainer of `Effect-TS`. For patiently teaching me about effect @imax153
+ - Giulio Canti - Creator of `fp-ts` and Core Maintainer of `Effect-TS`. For getting me into fp @GiulioCanti
+ - Patrick Roza - Active Community member. For being obsessed with laziness and writing insane abstractions
+ - Tim Smart - Active Community member. For his time helping me tackle hard problems
+
+---
+layout: center
+---
+
+# And thank you!
+
+For sticking through this presentation
+
+If you have any questions about compositions, functional programming, or effect-ts. Go ahead!
